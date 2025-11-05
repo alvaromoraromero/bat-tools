@@ -2,7 +2,14 @@
 setlocal enabledelayedexpansion
 title Sincronizador de cambios - Configuracion inicial
 REM Creado por Álvaro Mora
-call "%~dp0config.bat"
+
+REM Cargar config
+set localgitpath=0
+set workspace_folder=C:\ProgramData\workspace
+set configfile= "%~dp0config.bat"
+if exist %configfile% (
+    call %configfile%
+)
 
 if not %localgitpath%==0 (
     goto CHECKACTUALREPO

@@ -2,7 +2,14 @@
 setlocal enabledelayedexpansion
 title FIX MySQL Data
 REM Creado por Álvaro Mora
-call "%~dp0config.bat"
+
+REM Cargar config
+set debug=0
+set xampp_folder=C:\xampp
+set configfile= "%~dp0config.bat"
+if exist %configfile% (
+    call %configfile%
+)
 
 if %debug%==1 (
     echo [DEBUG] Script ejecutandose en modo debug
