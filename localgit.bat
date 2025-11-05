@@ -2,17 +2,18 @@
 setlocal enabledelayedexpansion
 title Sincronizador de cambios - Configuracion inicial
 REM Creado por Álvaro Mora
+call "%~dp0config.bat"
 
-REM Descomentar las dos lineas inferiores para omitir configuracion inicial
-REM set localgitpath=D:\repos
-REM goto CHECKACTUALREPO
+if not %localgitpath%==0 (
+    goto CHECKACTUALREPO
+)
 
 REM Pedir al usuario la ruta que contiene los repositorios en su USB
 set /p localgitpath=Introduce la ruta contenedora de repositorios en tu USB: 
 goto CHECKACTUALREPO
 
 :CHECKACTUALREPO
-title Sincronizar cambios de repositorio Airbus a USB (!localgitpath!)
+title Sincronizar cambios de repositorio local a USB (!localgitpath!)
 if not exist "!localgitpath!" (
     echo La ruta "!localgitpath!" no existe.
     goto SALIR
@@ -43,7 +44,7 @@ goto SELECTREPO
 :SELECTREPO
 cls
 REM Listar carpetas de workspace que contengan una carpeta .git dentro
-set "workspace=C:\ProgramData\workspace"
+set workspace=%workspace_folder%
 set "repos="
 for /d %%D in ("!workspace!\*") do (
     if exist "%%D\.git" (
@@ -224,4 +225,4 @@ goto ACCION
 echo.
 echo Saliendo...
 timeout -t 2 > NUL
-exit
+endlocal

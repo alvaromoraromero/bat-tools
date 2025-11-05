@@ -2,19 +2,19 @@
 setlocal enabledelayedexpansion
 title FIX MySQL Data
 REM Creado por Álvaro Mora
+call "%~dp0config.bat"
 
-set "debug=0"
 if %debug%==1 (
     echo [DEBUG] Script ejecutandose en modo debug
 )
 
 REM Cambiar al directorio XAMPP. Se puede personalizar
-cd /d "C:\xampp"
+cd /d %xampp_folder%
 
 REM Verificar si existe la carpeta ./mysql/data
 if not exist ".\mysql\data" (
     echo [ERROR] No se encontro la carpeta ".\mysql\data"
-    goto:salir
+    goto:SALIR
 )
 
 REM Detener el proceso mysqld.exe si esta corriendo
@@ -70,7 +70,10 @@ if exist ".\mysql\data-old-tmp" (
 
 echo.
 echo [OK]    Proceso completado.
-
-:salir
 pause
+
+:SALIR
+echo.
+echo Saliendo...
+timeout -t 2 > NUL
 endlocal

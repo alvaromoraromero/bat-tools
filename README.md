@@ -6,15 +6,17 @@ Repositorio con algunos scripts en bash de Windows (.bat) con utilidades varias.
 > De esta forma, podrás ejecutarlos desde cualquier ubicación en una terminal.
 
 # Indice
-Haz clic en el script sobre el que deseas obtener informaciñon adicional
-- [fix-mysql](#fix-mysql) Reparar carpeta data de la instalacion mysql de XAMPP
-- [localgit](#localgit) Gestionar un repositorio "bare" git remoto en un USB
+Haz clic en el script sobre el que deseas obtener información adicional:
+- [fix-mysql.bat](#fix-mysql) Reparar carpeta data de la instalacion mysql de XAMPP.
+- **config.bat** Se utiliza para cargar el variables de configuración compartidas. [ABRIR ARCHIVO](config.bat)
+- [localgit.bat](#localgit) Gestionar un repositorio "bare" git remoto en un USB.
 
 # fix-mysql
 ## Reparar carpeta data de la instalacion mysql de XAMPP
+[ABRIR ARCHIVO](fix-mysql.bat)
 
 > [!NOTE]
->Este script utiliza la ruta `C:\xampp` por defecto, puedes cambiarla modificando el script manualmente.
+> Este script utiliza la ruta `C:\xampp` por defecto, puedes cambiarla en la clave `xampp_folder` de `config.json`.
 
 A veces, el servicio MySQL de XAMPP se cierra y deja la carpeta data corrupta. La solución a este problema generalmente es regenerar la carpeta data utilizando la carpeta backup como base. Todo esto lo hace este script de forma automática.
 
@@ -29,12 +31,13 @@ Hecho esto, el servicio de MySQL de XAMPP debería volver a funcionar con normal
 
 # localgit
 ## Gestionar un repositorio "bare" git remoto en un USB
+[ABRIR ARCHIVO](localgit.bat)
 
 > [!TIP]
-> Para omitir la pregunta para introducir la ruta contenedora de repositorios en el USB, se puede dar un valor fijo a la variable `localgitpath`. Ten en cuenta que si la letra de unidad del USB cambia, será necesario actualizar el valor fijado de la variable.
+> Para omitir la pregunta para introducir la ruta contenedora de repositorios en el USB, se puede dar un valor en la clave `localgitpath` de `config.json`. Ten en cuenta que si la letra de unidad del USB cambia, será necesario actualizar el valor.
 
 Cuando se inicia el script, comprueba si la ruta desde la que se ha iniciado tiene un repositorio de git inicializado.
-En caso negativo o que se indique que no se desea utilizar dicho repositorio, buscará y listará los repositorios en `C:\ProgramData\workspace`. Puedes cambiar esta ruta modificando el script manualmente.
+En caso negativo o que se indique que no se desea utilizar dicho repositorio, buscará y listará los repositorios en la ruta definida en la clave `workspace_folder` de `config.json`.
 
 Una vez seleccionado un repositorio, siempre mostrará una pantalla de confirmacion en la que se indica la ubicación del repositorio local y la que utilizará en el USB. Si existe, mostrará el menú principal y en caso contrario el menú de inicio de clonado en USB.
 
